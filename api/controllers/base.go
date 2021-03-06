@@ -10,7 +10,6 @@ import (
 
 	_ "github.com/jinzhu/gorm/dialects/mysql"    //mysql database driver
 	_ "github.com/jinzhu/gorm/dialects/postgres" //postgres database driver
-	_ "gorm.io/driver/mysql"
 
 	"github.com/fawziridwan/backstack/api/models"
 )
@@ -20,28 +19,28 @@ type Server struct {
 	Router *mux.Router
 }
 
-func (server *Server) Initialize(driver, user, password, port, host, name string) {
+func (server *Server) Initialize(Dbdriver, DbUser, DbPassword, DbPort, DbHost, DbName string) {
 	var err error
 
-	if driver == "mysql" {
-		DBURL := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local", driver, user, password, port, host, name)
-		server.DB, err = gorm.Open(driver, DBURL)
+	if Dbdriver == "mysql" {
+		DBURL := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local", DbUser, DbPassword, DbPort, DbHost, DbName)
+		server.DB, err = gorm.Open(Dbdriver, DBURL)
 		if err != nil {
-			fmt.Printf("Cannot connect to %s database", driver)
+			fmt.Printf("Cannot connect to %s database", Dbdriver)
 			log.Fatal("This is the error:", err)
 		} else {
-			fmt.Printf("We are connected to the %s database", driver)
+			fmt.Printf("We are connected to the %s database", Dbdriver)
 		}
 	}
 
-	if driver == "postgres" {
-		DBURL := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", driver, user, password, port, host, name)
-		server.DB, err = gorm.Open(driver, DBURL)
+	if Dbdriver == "postgres" {
+		DBURL := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", DbUser, DbPassword, DbPort, DbHost, DbName)
+		server.DB, err = gorm.Open(Dbdriver, DBURL)
 		if err != nil {
-			fmt.Printf("Cannot connect to %s database", driver)
+			fmt.Printf("Cannot connect to %s database", Dbdriver)
 			log.Fatal("This is the error:", err)
 		} else {
-			fmt.Printf("We are connected to the %s database", driver)
+			fmt.Printf("We are connected to the %s database", Dbdriver)
 		}
 	}
 
@@ -52,7 +51,7 @@ func (server *Server) Initialize(driver, user, password, port, host, name string
 	server.initializeRoutes()
 }
 
-func (server *Server) run(address string) {
+func (server *Server) Run(address string) {
 	fmt.Println("Listening to port 8080")
 	log.Fatal(http.ListenAndServe(address, server.Router))
 }
