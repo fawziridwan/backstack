@@ -10,7 +10,7 @@ require (
 	github.com/jinzhu/gorm v1.9.16
 	github.com/joho/godotenv v1.3.0
 	golang.org/x/crypto v0.0.0-20210220033148-5ea612d1eb83
-	gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
+	gopkg.in/go-playground/assert.v1 v1.2.1
 	gorm.io/driver/mysql v1.0.4
 	gorm.io/gorm v1.21.2 // indirect
 )
