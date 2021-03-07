@@ -1,8 +1,8 @@
 package helpers
 
 import (
-	"encoding/json"
 	"fmt"
+	"encoding/json"
 	"net/http"
 )
 
@@ -22,5 +22,5 @@ func ErrorHandler(w http.ResponseWriter, statusCode int, err error) {
 			Error: err.Error(),
 		})
 	}
-	JsonResponse(w, http.StatusBadRequest, nil)
+	// JsonResponse(w, http.StatusBadRequest, nil)
 }
