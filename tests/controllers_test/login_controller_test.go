@@ -1,4 +1,4 @@
-package controller_test
+package controllers_test
 
 import (
 	"bytes"
@@ -9,8 +9,8 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
-	
-	"gopkg.in/go-playground/assert.v1"	
+
+	"gopkg.in/go-playground/assert.v1"
 )
 
 func TestSignIn(t *testing.T) {
